@@ -18,6 +18,10 @@ def save_books(books: List[Book]) -> None:
 
 def add_book(author: str, title: str, rating: int) -> bool:
     books = load_books()
+    # Проверка на дубликаты
+    if any(b.author == author and b.title == title for b in books):
+        print("Книга уже существует в списке!")
+        return False
     if 1 <= rating <= 5:
         new_book = Book(author, title, rating)
         books.append(new_book)
